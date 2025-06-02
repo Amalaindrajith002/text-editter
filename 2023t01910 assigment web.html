@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Full Page Text Editor</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+      font-family: Arial, sans-serif;
+    }
+
+    .toolbar {
+      background-color: #343a40;
+      padding: 10px 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 18px;
+      color: white;
+    }
+
+    .toolbar button {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .toolbar button:hover {
+      color: #00bcd4;
+    }
+
+    .toolbar input[type="color"] {
+      width: 20px;
+      height: 20px;
+      padding: 0;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+    }
+
+    #editor {
+      height: calc(100vh - 50px); /* Subtract toolbar height */
+      background: white;
+      padding: 20px;
+      overflow-y: auto;
+      font-size: 16px;
+      outline: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="toolbar">
+    <button onclick="format('bold')" title="Bold"><i class="fas fa-bold"></i></button>
+    <button onclick="format('underline')" title="Underline"><i class="fas fa-underline"></i></button>
+    <button onclick="format('italic')" title="Italic"><i class="fas fa-italic"></i></button>
+    <input type="color" title="Font Color" onchange="formatWithValue('foreColor', this.value)" />
+    <button onclick="format('justifyLeft')" title="Align Left"><i class="fas fa-align-left"></i></button>
+    <button onclick="format('justifyCenter')" title="Align Center"><i class="fas fa-align-center"></i></button>
+    <button onclick="format('justifyRight')" title="Align Right"><i class="fas fa-align-right"></i></button>
+    <button onclick="format('undo')" title="Undo"><i class="fas fa-undo"></i></button>
+    <button onclick="format('redo')" title="Redo"><i class="fas fa-redo"></i></button>
+  </div>
+
+  <div id="editor" contenteditable="true">
+    Start typing your text here...
+  </div>
+
+  <script>
+    function format(command) {
+      document.execCommand(command, false, null);
+    }
+
+    function formatWithValue(command, value) {
+      document.execCommand(command, false, value);
+    }
+  </script>
+
+</body>
+</html>
